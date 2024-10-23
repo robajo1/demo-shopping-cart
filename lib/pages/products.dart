@@ -17,6 +17,7 @@ class products extends StatefulWidget {
 
 class _productsState extends State<products> {
   List<Productdetail> product = [];
+
   Future getproduct() async {
     String name = widget.product_name;
 
@@ -30,7 +31,10 @@ class _productsState extends State<products> {
             category: data['category'],
             description: data['description'],
             image: data['image'],
-            price: data['price'],
+            price: (data['price'] is int)
+                ? (data['price'] as int).toDouble()
+                : data[
+                    'price'], //must be casted in to double if the price is int other wise doesn't work
             title: data['title']),
       );
     }
