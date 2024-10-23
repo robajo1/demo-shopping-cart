@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopping_cart/pages/products.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -42,16 +44,35 @@ class _HomepageState extends State<Homepage> {
       body: FutureBuilder(
         future: getCatagory(),
         builder: (context, snapshot) {
-          //if done show  the catagories
+          //if getCatagorie done show  the catagories
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
               itemCount: catagories.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  //when tapped go to other screen
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            products(product_name: catagories[index]),
+                      ),
+                    );
+                  },
                   child: Container(
-                    height: 200,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(4.w, 4.h),
+                          blurRadius: 5,
+                        )
+                      ],
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(15.h),
+                    ),
+                    margin: EdgeInsets.all(3.h),
+                    height: 200.h,
                     width: double.infinity,
                     child: Center(
                       child: Text(catagories[index]),
