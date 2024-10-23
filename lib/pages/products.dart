@@ -56,29 +56,38 @@ class _productsState extends State<products> {
             return GridView.builder(
               itemCount: product.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 3.h,
+                crossAxisSpacing: 5.h,
                 crossAxisCount: 2,
+                childAspectRatio:
+                    0.5, //controlls the height ratio based on the width
               ),
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {},
                   child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(4.w, 4.h),
-                          blurRadius: 5,
-                        )
+                    // decoration: BoxDecoration(
+                    //   boxShadow: [
+                    //     BoxShadow(
+                    //       //color: Colors.black,
+                    //       offset: Offset(4.w, 4.h),
+                    //       blurRadius: 5,
+                    //     )
+                    //   ],
+                    //   borderRadius: BorderRadius.circular(15.h),
+                    // ),
+                    margin: EdgeInsets.all(10.h),
+                    child: Column(
+                      children: [
+                        Image.network(
+                          fit: BoxFit.fill,
+                          product[index].image,
+                        ),
+                        Text(
+                          product[index].title,
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        Text(product[index].price.toString())
                       ],
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(15.h),
-                    ),
-                    margin: EdgeInsets.all(3.h),
-                    height: 400.h,
-                    width: 20.w,
-                    child: Center(
-                      child: Text(product[index].title),
                     ),
                   ),
                 );
