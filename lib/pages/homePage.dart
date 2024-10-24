@@ -4,8 +4,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shopping_cart/pages/cart.dart';
 import 'package:shopping_cart/pages/products.dart';
+import 'package:shopping_cart/pages/sheet.dart';
+import 'package:shopping_cart/provider/cartprovider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -31,22 +34,6 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const cart(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.shopping_cart,
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-          )
-        ],
         title: const Center(
           child: Text("Shopping list"),
         ),
@@ -101,6 +88,8 @@ class _HomepageState extends State<Homepage> {
           }
         },
       ),
+      bottomSheet:
+          context.watch<Cartprovider>().size() == 0 ? null : const Sheet(),
     );
   }
 }
