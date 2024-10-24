@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_cart/pages/homePage.dart';
+import 'package:shopping_cart/pages/products.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,11 +18,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return const MaterialApp(
           home: Homepage(),
-          // routes: {
-          //   '/product': (context) => products(
-          //         product_name: '',
-          //       ),
-          // },
         );
       },
     );

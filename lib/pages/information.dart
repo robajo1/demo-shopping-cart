@@ -27,6 +27,10 @@ class Information extends StatelessWidget {
             fontSize: 17.sp,
           ),
         ),
+        TextButton(
+          onPressed: () {}, //should be connected to a provider class
+          child: const Text('Buy'),
+        )
       ],
     );
   }

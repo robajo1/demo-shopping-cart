@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopping_cart/pages/cart.dart';
 import 'package:shopping_cart/pages/products.dart';
 
 class Homepage extends StatefulWidget {
@@ -30,10 +31,20 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          Icon(
-            Icons.shopping_cart,
-            color: Color.fromARGB(255, 0, 0, 0),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const cart(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
           )
         ],
         title: const Center(

@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, must_be_immutable
+// ignore_for_file: camel_case_types, must_be_immutable, non_constant_identifier_names
 
 import 'dart:convert';
 
@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_cart/model/productDetail.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopping_cart/pages/cart.dart';
 import 'package:shopping_cart/pages/information.dart';
 
 class products extends StatefulWidget {
@@ -45,6 +46,22 @@ class _productsState extends State<products> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const cart(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+          )
+        ],
         backgroundColor: Colors.blue,
         title: Center(
           child: Text(widget.product_name),
