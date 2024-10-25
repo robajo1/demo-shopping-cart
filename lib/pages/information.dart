@@ -33,7 +33,12 @@ class Information extends StatelessWidget {
           onPressed: () {
             Provider.of<Cartprovider>(context, listen: false).add(item);
           }, //should be connected to a provider class
-          child: const Text('Buy'),
+          child: const Text(
+            'Buy',
+            style: TextStyle(
+                color: Color.fromARGB(255, 30, 0, 255),
+                fontWeight: FontWeight.bold),
+          ),
         )
       ],
     );
@@ -45,7 +50,7 @@ class Information extends StatelessWidget {
       onTap: () {},
       child: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(76, 123, 119, 107),
+          color: Color.fromARGB(75, 220, 215, 199),
           borderRadius: BorderRadius.circular(15.h),
         ),
         margin: EdgeInsets.all(10.h),

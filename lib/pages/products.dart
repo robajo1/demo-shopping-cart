@@ -21,8 +21,15 @@ class products extends StatefulWidget {
 
 class _productsState extends State<products> {
   List<Productdetail> product = [];
+  late Future<void> productFuture;
+  final double bottomSheetHeight = 80.h;
+  @override
+  void initState() {
+    super.initState();
+    productFuture = getproduct();
+  }
 
-  Future getproduct() async {
+  Future<void> getproduct() async {
     String name = widget.product_name;
 
     var response = await http
@@ -32,52 +39,61 @@ class _productsState extends State<products> {
     for (var data in jsondata) {
       product.add(
         Productdetail(
-            category: data['category'],
-            description: data['description'],
-            image: data['image'],
-            price: (data['price'] is int)
-                ? (data['price'] as int).toDouble()
-                : data[
-                    'price'], //must be casted in to double if the price is int other wise doesn't work
-            title: data['title']),
+          category: data['category'],
+          description: data['description'],
+          image: data['image'],
+          price: (data['price'] is int)
+              ? (data['price'] as int).toDouble()
+              : data['price'],
+          title: data['title'],
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    bool hasItemsInCart = context.watch<Cartprovider>().size() > 0;
+
     return Scaffold(
+      backgroundColor: Color.fromARGB(222, 106, 133, 243),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(142, 33, 149, 243),
         title: Center(
           child: Text(widget.product_name),
         ),
       ),
-      body: FutureBuilder(
-        future: getproduct(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return GridView.builder(
-              itemCount: product.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 5.h,
-                crossAxisCount: 2,
-                childAspectRatio:
-                    0.5, //controlls the height ratio based on the width
-              ),
-              itemBuilder: (context, index) {
-                return Information(item: product[index]);
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+      body: Padding(
+        padding: EdgeInsets.only(
+            bottom: hasItemsInCart
+                ? bottomSheetHeight
+                : 0), //padding the size of the sheet so that info won't get hidden
+        child: FutureBuilder(
+          future: productFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return GridView.builder(
+                itemCount: product.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 5.h,
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.5,
+                ),
+                itemBuilder: (context, index) {
+                  return Information(item: product[index]);
+                },
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
-      bottomSheet:
-          context.watch<Cartprovider>().size() == 0 ? null : const Sheet(),
+      bottomSheet: hasItemsInCart
+          ? SizedBox(height: bottomSheetHeight, child: const Sheet())
+          : null,
     );
   }
 }

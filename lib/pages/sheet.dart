@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_cart/provider/cartprovider.dart';
 
 class Sheet extends StatefulWidget {
   const Sheet({super.key});
@@ -14,13 +16,7 @@ class _SheetState extends State<Sheet> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.w),
-            topRight: Radius.circular(40.w),
-          ),
-          color: Colors.black87,
-        ),
+        color: const Color.fromARGB(135, 97, 96, 96),
         padding: EdgeInsets.all(16.h),
         height: 80.h,
         child: Row(
@@ -28,13 +24,19 @@ class _SheetState extends State<Sheet> {
           children: [
             Text(
               'Cart',
-              style: TextStyle(color: Colors.white, fontSize: 18.sp),
+              style: TextStyle(
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold),
             ),
             Row(
               children: [
-                const Text(
-                  '1 Item', // This will show the number of items
-                  style: TextStyle(color: Colors.white),
+                Text(
+                  '${context.watch<Cartprovider>().size()} Item', // This will show the number of items
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 2, 0, 0),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(width: 10.w),
                 const CircleAvatar(
