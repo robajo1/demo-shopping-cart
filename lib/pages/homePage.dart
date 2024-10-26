@@ -131,7 +131,6 @@ class _homeState extends State<home> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return ListView.builder(
-                      padding: EdgeInsets.all(20.h),
                       itemCount: products.length,
                       itemBuilder: (context, index) {
                         return information_container(item: products[index]);

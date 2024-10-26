@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +8,7 @@ import 'package:shopping_cart/provider/cartprovider.dart';
 
 class information_container extends StatelessWidget {
   Productdetail item;
-  information_container({super.key, required Productdetail this.item});
+  information_container({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class information_container extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 218, 223, 227),
                       borderRadius: BorderRadius.circular(10)),
-                  height: 150,
-                  width: 150,
+                  height: 150.h,
+                  width: 150.w,
                   child: Image.network(
                     item.image,
                     fit: BoxFit.contain,
