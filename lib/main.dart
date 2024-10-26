@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_cart/pages/homePage.dart';
-import 'package:shopping_cart/pages/products.dart';
+import 'package:shopping_cart/home.dart';
 import 'package:shopping_cart/provider/cartprovider.dart';
 
 void main() {
