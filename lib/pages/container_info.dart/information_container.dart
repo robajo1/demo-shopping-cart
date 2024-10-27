@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_cart/model/productDetail.dart';
+import 'package:shopping_cart/pages/itemDetailSheet.dart';
 import 'package:shopping_cart/provider/cartprovider.dart';
 
 class information_container extends StatelessWidget {
@@ -13,7 +14,14 @@ class information_container extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Itemdetailsheet();
+          },
+        );
+      },
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.w),

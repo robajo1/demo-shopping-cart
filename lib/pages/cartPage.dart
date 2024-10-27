@@ -72,12 +72,21 @@ class _CartpageState extends State<Cartpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Container(
-            color: const Color.fromARGB(84, 255, 255, 255),
+    if (context.read<Cartprovider>().size() == 0) {
+      return Center(
+        child: Text(
+          "Cart Is Empty !!",
+          style: TextStyle(
+            fontSize: 25.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
             child: ListView.builder(
               itemCount: context.read<Cartprovider>().size(),
               itemBuilder: (context, index) {
@@ -85,21 +94,39 @@ class _CartpageState extends State<Cartpage> {
               },
             ),
           ),
-        ),
-        Wrap(
-          children: [
-            const Text("Total:    "),
-            Container(
-              child: Text(totalprice().toString()),
-            )
-          ],
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text("Check out"),
-        )
-      ],
-    );
+          Wrap(
+            children: [
+              Text(
+                "Total: ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.sp,
+                ),
+              ),
+              Text(
+                "\$${totalprice().toString()}",
+                style: TextStyle(
+                  color: const Color.fromARGB(255, 211, 53, 53),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.sp,
+                ),
+              )
+            ],
+          ),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor:
+                  const WidgetStatePropertyAll(Color.fromARGB(255, 87, 83, 68)),
+              foregroundColor: const WidgetStatePropertyAll(
+                  Color.fromARGB(255, 255, 255, 255)),
+              elevation: WidgetStateProperty.all(20.h),
+            ),
+            onPressed: () {},
+            child: const Text("Check out"),
+          )
+        ],
+      );
+    }
   }
 
   double totalprice() {

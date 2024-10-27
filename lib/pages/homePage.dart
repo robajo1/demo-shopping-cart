@@ -16,9 +16,11 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  String catagory = "";
   List products = [];
   Future getProduct() async {
-    var response = await http.get(Uri.https('fakestoreapi.com', 'products'));
+    var response =
+        await http.get(Uri.https('fakestoreapi.com', 'products$catagory'));
     var jsondata = jsonDecode(response.body);
 
     for (var data in jsondata) {
@@ -86,7 +88,12 @@ class _homeState extends State<home> {
                     backgroundColor: selectedcolor,
                     foregroundColor: selectedtxtcolor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      products.clear();
+                      catagory = "";
+                    });
+                  },
                   child: const Text("All"),
                 ),
                 TextButton(
@@ -94,7 +101,12 @@ class _homeState extends State<home> {
                     backgroundColor: ButtonColor,
                     foregroundColor: textButtonColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      products.clear();
+                      catagory = "/category/electronics";
+                    });
+                  },
                   child: const Text("Electronics"),
                 ),
                 TextButton(
@@ -102,7 +114,12 @@ class _homeState extends State<home> {
                     backgroundColor: ButtonColor,
                     foregroundColor: textButtonColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      products.clear();
+                      catagory = "/category/jewelery";
+                    });
+                  },
                   child: const Text("Jewlery"),
                 ),
                 TextButton(
@@ -110,7 +127,12 @@ class _homeState extends State<home> {
                     backgroundColor: ButtonColor,
                     foregroundColor: textButtonColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      products.clear();
+                      catagory = "/category/men's clothing";
+                    });
+                  },
                   child: const Text("men's cloth"),
                 ),
                 TextButton(
@@ -118,7 +140,12 @@ class _homeState extends State<home> {
                     backgroundColor: ButtonColor,
                     foregroundColor: textButtonColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      products.clear();
+                      catagory = "/category/women's clothing";
+                    });
+                  },
                   child: const Text("women's cloth"),
                 ),
               ],
