@@ -1,5 +1,6 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_cart/provider/cartprovider.dart';
@@ -52,7 +53,12 @@ class _CartpageState extends State<Cartpage> {
             padding: EdgeInsets.only(right: 15.w),
             child: IconButton(
               color: const Color.fromARGB(180, 233, 239, 148),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  Provider.of<Cartprovider>(context, listen: false)
+                      .remove(context.read<Cartprovider>().cart[index]);
+                });
+              },
               icon: const Icon(
                 Icons.cancel,
                 size: 30,
@@ -82,17 +88,25 @@ class _CartpageState extends State<Cartpage> {
         ),
         Wrap(
           children: [
-            Text("Total:    "),
+            const Text("Total:    "),
             Container(
-              child: Text("\$1234"),
+              child: Text(totalprice().toString()),
             )
           ],
         ),
         ElevatedButton(
           onPressed: () {},
-          child: Text("Check out"),
+          child: const Text("Check out"),
         )
       ],
     );
+  }
+
+  double totalprice() {
+    double total = 0.0;
+    for (int i = 0; i < context.read<Cartprovider>().size(); i++) {
+      total += context.read<Cartprovider>().cart[i].price;
+    }
+    return total;
   }
 }
