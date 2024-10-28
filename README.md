@@ -1,6 +1,6 @@
 # shopping_cart
 
-A new Flutter project.
+Flutter project ,demo shopping cart that uses https://fakestoreapi.com/ to get products and provider state manager to manage state
 
 ## Getting Started
 
