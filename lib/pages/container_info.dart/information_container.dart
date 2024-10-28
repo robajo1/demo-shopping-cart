@@ -18,7 +18,9 @@ class information_container extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           builder: (context) {
-            return Itemdetailsheet();
+            return Itemdetailsheet(
+              item: item,
+            );
           },
         );
       },
@@ -58,7 +60,7 @@ class information_container extends StatelessWidget {
                         ),
                         item.category,
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Padding(
                         padding: EdgeInsets.only(bottom: 10.h),
                         child: Row(
@@ -78,9 +80,9 @@ class information_container extends StatelessWidget {
                                   backgroundColor: WidgetStateProperty.all<
                                           Color>(
                                       const Color.fromARGB(255, 255, 253, 253)),
-                                  foregroundColor:
-                                      WidgetStateProperty.all<Color>(
-                                          Color.fromARGB(255, 13, 102, 236)),
+                                  foregroundColor: WidgetStateProperty.all<
+                                          Color>(
+                                      const Color.fromARGB(255, 13, 102, 236)),
                                 ),
                                 onPressed: () {
                                   Provider.of<Cartprovider>(context,

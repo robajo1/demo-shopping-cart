@@ -16,6 +16,7 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  String selectedCategory = ""; // Holds the currently selected category
   String catagory = "";
   List products = [];
   Future getProduct() async {
@@ -64,7 +65,7 @@ class _homeState extends State<home> {
               text: TextSpan(
                 text: "Best Store",
                 style: TextStyle(
-                  color: Color.fromARGB(193, 30, 30, 30),
+                  color: const Color.fromARGB(193, 30, 30, 30),
                   fontWeight: FontWeight.bold,
                   fontSize: 40.sp,
                 ),
@@ -83,71 +84,13 @@ class _homeState extends State<home> {
             child: Wrap(
               spacing: 10.w,
               children: [
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: selectedcolor,
-                    foregroundColor: selectedtxtcolor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      products.clear();
-                      catagory = "";
-                    });
-                  },
-                  child: const Text("All"),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: ButtonColor,
-                    foregroundColor: textButtonColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      products.clear();
-                      catagory = "/category/electronics";
-                    });
-                  },
-                  child: const Text("Electronics"),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: ButtonColor,
-                    foregroundColor: textButtonColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      products.clear();
-                      catagory = "/category/jewelery";
-                    });
-                  },
-                  child: const Text("Jewlery"),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: ButtonColor,
-                    foregroundColor: textButtonColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      products.clear();
-                      catagory = "/category/men's clothing";
-                    });
-                  },
-                  child: const Text("men's cloth"),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: ButtonColor,
-                    foregroundColor: textButtonColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      products.clear();
-                      catagory = "/category/women's clothing";
-                    });
-                  },
-                  child: const Text("women's cloth"),
-                ),
+                _buildCategoryButton("All", ""),
+                _buildCategoryButton("Electronics", "/category/electronics"),
+                _buildCategoryButton("Jewelry", "/category/jewelry"),
+                _buildCategoryButton(
+                    "Men's Clothing", "/category/men's clothing"),
+                _buildCategoryButton(
+                    "Women's Clothing", "/category/women's clothing"),
               ],
             ),
           ),
@@ -174,6 +117,25 @@ class _homeState extends State<home> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildCategoryButton(String label, String category) {
+    bool isSelected = selectedCategory == category;
+
+    return TextButton(
+      style: ButtonStyle(
+        backgroundColor: isSelected ? selectedcolor : ButtonColor,
+        foregroundColor: isSelected ? selectedtxtcolor : textButtonColor,
+      ),
+      onPressed: () {
+        setState(() {
+          selectedCategory = category;
+          products.clear();
+          catagory = category;
+        });
+      },
+      child: Text(label),
     );
   }
 }

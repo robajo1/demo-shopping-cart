@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +48,7 @@ class _CartpageState extends State<Cartpage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.only(right: 15.w),
             child: IconButton(
