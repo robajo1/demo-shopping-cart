@@ -86,7 +86,7 @@ class _homeState extends State<home> {
               children: [
                 _buildCategoryButton("All", ""),
                 _buildCategoryButton("Electronics", "/category/electronics"),
-                _buildCategoryButton("Jewelry", "/category/jewelry"),
+                _buildCategoryButton("Jewelry", "/category/jewelery"),
                 _buildCategoryButton(
                     "Men's Clothing", "/category/men's clothing"),
                 _buildCategoryButton(
